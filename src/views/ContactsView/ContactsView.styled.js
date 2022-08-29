@@ -1,7 +1,7 @@
-import styled from '@emotion/styled';
+import styled from 'styled-components';
 
 export const Container = styled.div`
-  width: 630px;
+  width: 505px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -10,7 +10,4 @@ export const Container = styled.div`
   color: rgb(94, 94, 155);
   background: linear-gradient(lightblue, lightyellow);
   padding: 30px;
-`;
-export const Title = styled.h1`
-  font-size: 40;
 `;

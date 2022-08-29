@@ -1,27 +1,32 @@
-import { Contact } from '../Contact';
-import { List } from './ContactList.styled';
-import { useFilteredContacts } from 'hooks/useFilteredContacts';
+import PropTypes from 'prop-types';
+import { List, Container } from './ContactList.styled';
+import { ContactListItem } from 'components/ContactListItem/ContactListItem';
 
-export const ContactList = () => {
-  const { contacts, filteredContacts } = useFilteredContacts();
-
+const ContactList = ({ items }) => {
   return (
-    <>
-      {contacts &&
-        (contacts.length > 0 ? (
+    <Container>
+      {items &&
+        (items.length > 0 ? (
           <List>
-            {filteredContacts.map(contact => (
-              <Contact
-                key={contact.id}
-                id={contact.id}
-                name={contact.name}
-                phone={contact.phone}
-              />
+            {items.map(contact => (
+              <ContactListItem key={contact.id} {...contact} />
             ))}
           </List>
         ) : (
           <p>There no contacts</p>
         ))}
-    </>
+    </Container>
   );
 };
+
+ContactList.propTypes = {
+  items: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      number: PropTypes.string.isRequired,
+    })
+  ),
+};
+
+export default ContactList;

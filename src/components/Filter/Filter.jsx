@@ -1,22 +1,24 @@
-import { nanoid } from 'nanoid';
-import { Field } from './Filter.styled';
-import { setFilter, getFilter } from 'redux/filterSlice';
-import { useDispatch, useSelector } from 'react-redux';
+import PropTypes from 'prop-types';
+import { TextField } from '@mui/material';
+import { Container } from './Filter.styled';
 
-export const Filter = () => {
-  const filter = useSelector(getFilter);
-  const dispatch = useDispatch();
-
-  const inputIdGenerate = nanoid();
-
+export const Filter = ({ value, onChange }) => {
   return (
-    <>
-      <label htmlFor={inputIdGenerate}>Find contacts by name</label>
-      <Field
-        value={filter}
-        onChange={e => dispatch(setFilter(e.target.value))}
-        id={inputIdGenerate}
+    <Container>
+      <TextField
+        id="outlined-basic"
+        label="Find contact by name"
+        variant="outlined"
+        onChange={onChange}
+        value={value}
+        autoComplete="off"
+        size="small"
       />
-    </>
+    </Container>
   );
+};
+
+Filter.propTypes = {
+  value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
 };
